@@ -23,22 +23,96 @@ class _RootShellState extends State<RootShell> {
     _PlaceholderTab(title: 'Profile', icon: Icons.person_rounded),
   ];
 
+  final _navItems = const [
+    _NavItemData(icon: Icons.home_rounded, label: 'Home'),
+    _NavItemData(icon: Icons.menu_book_rounded, label: 'Study'),
+    _NavItemData(icon: Icons.bar_chart_rounded, label: 'Progress'),
+    _NavItemData(icon: Icons.person_rounded, label: 'Profile'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(index: _index, children: _tabs),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _index,
-        onTap: (i) => setState(() => _index = i),
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.menu_book_rounded), label: 'Study'),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart_rounded), label: 'Progress'),
-          BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: 'Profile'),
-        ],
-      ),
+      bottomNavigationBar: SafeArea(
+        child:
+        Container(
+          margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+          padding: const EdgeInsets.symmetric(
+            vertical: 5,
+            horizontal: 8,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(50),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.12),
+                blurRadius: 20,
+                spreadRadius: 1,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List.generate(_navItems.length, (i) {
+              final bool selected = i == _index;
+              final item = _navItems[i];
+
+              return GestureDetector(
+                onTap: () => setState(() => _index = i),
+                behavior: HitTestBehavior.opaque,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 17,
+                    vertical: 5,
+                  ),
+                  decoration: BoxDecoration(
+                    color: selected
+                        ? AppColors.primary.withOpacity(0.09)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        item.icon,
+                        color: selected
+                            ? AppColors.primary
+                            : AppColors.textMuted,
+                        size: 24,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        item.label,
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: selected
+                              ? FontWeight.w600
+                              : FontWeight.w500,
+                          color: selected
+                              ? AppColors.primary
+                              : AppColors.textMuted,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
+          ),
+        ),      ),
     );
   }
+}
+
+class _NavItemData {
+  final IconData icon;
+  final String label;
+  const _NavItemData({required this.icon, required this.label});
 }
 
 class _PlaceholderTab extends StatelessWidget {

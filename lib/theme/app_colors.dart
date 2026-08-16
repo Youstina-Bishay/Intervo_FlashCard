@@ -15,26 +15,27 @@ class AppColors {
   ];
 
   static const List<Color> heroGradient = [
-    Color(0xFF9333EA),
-    Color(0xFF6366F1),
+    Color(0xFF894FF9),
+    Color(0xFFAF8EF1),
   ];
 
-  static const Color background = Color(0xFFF7F5FB);
+  static const Color background = Color(0xFFF5F4FC);
   static const Color surface = Colors.white;
   static const Color cardBorder = Color(0xFFEDE9F7);
 
   static const Color textPrimary = Color(0xFF1E1B2E);
   static const Color textSecondary = Color(0xFF6B7280);
   static const Color textMuted = Color(0xFF9CA3AF);
-
-  static const Color frontend = Color(0xFF10B981);
+//Tracks colors
+  static const Color frontend = Color(0xFF058D60);
   static const Color backend = Color(0xFF6366F1);
-  static const Color database = Color(0xFF06B6D4);
-  static const Color systemDesign = Color(0xFFF59E0B);
+  static const Color flutter = Color(0xFF05A7DB);
+  static const Color devops = Color(0xFF7523D9);
+
   static const Color authentication = Color(0xFFEF4444);
   static const Color docker = Color(0xFF3B82F6);
   static const Color linux = Color(0xFF8B5CF6);
-  static const Color devops = Color(0xFF6366F1);
+
   static const Color sql = Color(0xFF06B6D4);
   static const Color normalization = Color(0xFFF59E0B);
   static const Color joins = Color(0xFF22C55E);
@@ -56,6 +57,8 @@ class AppColors {
 
   static Color trackColor(String key) {
     switch (key.toLowerCase()) {
+      case 'flutter':
+        return flutter;
       case 'frontend':
         return frontend;
       case 'backend':
@@ -73,9 +76,7 @@ class AppColors {
       case 'indexes':
         return indexes;
       case 'transactions':
-        return transactions;
-      case 'system_design':
-        return systemDesign;
+        return transactions;;
       case 'authentication':
         return authentication;
       case 'docker':

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../core/constants/icon_map.dart';
+import 'package:intervo/core/constants/screenSize.dart';
 import '../theme/app_colors.dart';
 import '../models/track.dart';
 
@@ -7,52 +7,108 @@ class TrackSelectorCard extends StatelessWidget {
   final Track track;
   final VoidCallback onTap;
 
-  const TrackSelectorCard({super.key, required this.track, required this.onTap});
+  const TrackSelectorCard({
+    super.key,
+    required this.track,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final color = AppColors.trackColor(track.iconKey);
+    final trackColor = AppColors.trackColor(track.name);
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(18),
         onTap: onTap,
         child: Container(
-          padding: const EdgeInsets.all(16),
+          width: ScreenSize.width(context) * .42,
+          height: ScreenSize.height(context) * .22,
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppColors.cardBorder),
+            gradient: LinearGradient(
+              colors: [
+                Colors.white.withOpacity(.45),
+                trackColor.withOpacity(.2),
+                Colors.white.withOpacity(.45),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(
+              color: AppColors.cardBorder,
+              width: 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: trackColor.withOpacity(.08),
+                blurRadius: 8,
+                offset: const Offset(0, 3),
+              ),
+            ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: color.withOpacity(0.12),
-                  borderRadius: BorderRadius.circular(12),
+              // Track Image
+              Expanded(
+                child: Center(
+                  child: Image.asset(
+                    track.image,
+                    width: ScreenSize.width(context) * .35,
+                    fit: BoxFit.contain,
+                  ),
                 ),
-                child: Icon(iconForKey(track.iconKey), color: color, size: 22),
               ),
-              const SizedBox(height: 14),
+
+              const SizedBox(height: 4),
+
+              // Track Name
               Text(
                 track.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 15,
                   color: AppColors.textPrimary,
                 ),
               ),
-              const SizedBox(height: 4),
+
+              const SizedBox(height: 3),
+
+              // Questions + Arrow
               Row(
                 children: [
-                  Text(
-                    '${track.totalQuestions}+ Questions',
-                    style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                  Expanded(
+                    child: Text(
+                      '${track.totalQuestions}+ Questions',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 11,
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
                   ),
-                  const Spacer(),
-                  Icon(Icons.arrow_forward_rounded, size: 16, color: color),
+
+                  const SizedBox(width: 5),
+
+                  Container(
+                    width: 28,
+                    height: 28,
+                    decoration: BoxDecoration(
+                      color: trackColor,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.arrow_forward_rounded,
+                      size: 17,
+                      color: Colors.white,
+                    ),
+                  ),
                 ],
               ),
             ],

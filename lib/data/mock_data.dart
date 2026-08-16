@@ -1,7 +1,9 @@
+import '../core/constants/appAssets.dart';
 import '../models/flashcard.dart';
 import '../models/topic.dart';
 import '../models/track.dart';
 import '../models/user_stats.dart';
+import '../theme/app_colors.dart';
 
 /// In-memory seed data for the whole app. This is a UI-only build: there is
 /// no networking, no persistence, and no Firebase — everything here just
@@ -10,12 +12,6 @@ import '../models/user_stats.dart';
 class MockData {
   MockData._();
 
-  static final UserStats userStats = const UserStats(
-    displayName: 'Youstina',
-    dayStreak: 12,
-    accuracyPercent: 85,
-    cardsStudied: 124,
-  );
 
   static final List<Track> tracks = [
     const Track(
@@ -23,35 +19,31 @@ class MockData {
       name: 'Frontend',
       description: 'Master the core concepts and be ready for any frontend interview.',
       totalQuestions: 320,
-      iconKey: 'frontend',
+      image: AppAssets.front,
+      color: AppColors.frontend
     ),
     const Track(
       id: 'backend',
       name: 'Backend',
       description: 'Master the core concepts and be ready for any backend interview.',
       totalQuestions: 410,
-      iconKey: 'backend',
-    ),
-    const Track(
-      id: 'database',
-      name: 'Database',
-      description: 'Master the core concepts and be ready for any database interview.',
-      totalQuestions: 150,
-      iconKey: 'database',
+        image: AppAssets.back,
+        color: AppColors.backend
     ),
     const Track(
       id: 'devops',
       name: 'DevOps',
       description: 'Master the tools and mindset to ship software faster and smarter.',
       totalQuestions: 140,
-      iconKey: 'devops',
-    ),
+        image: AppAssets.devops,
+        color: AppColors.devops    ),
     const Track(
-      id: 'system_design',
-      name: 'System Design',
-      description: 'Learn how to design scalable and reliable systems.',
+      id: 'Flutter',
+      name: 'Flutter',
+      description: 'Learn how to built mobile app .',
       totalQuestions: 140,
-      iconKey: 'system_design',
+        image: AppAssets.flutter,
+        color: AppColors.flutter
     ),
   ];
 
