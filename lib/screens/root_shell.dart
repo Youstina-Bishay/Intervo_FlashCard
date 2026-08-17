@@ -19,7 +19,7 @@ class _RootShellState extends State<RootShell> {
 
   final _tabs = const [
     HomeScreen(),
-    AddFlashcardScreen(initialTopicId: ""),
+    AddFlashcardScreen(),
     _PlaceholderTab(title: 'Add Card', icon: Icons.add),
 
   ];
