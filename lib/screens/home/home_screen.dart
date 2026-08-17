@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:intervo/core/constants/appAssets.dart';
 import 'package:intervo/core/constants/screenSize.dart';
 import 'package:intervo/screens/home/statsRow.dart';
 import 'package:provider/provider.dart';
-
 import '../../theme/app_colors.dart';
 import '../../providers/home_provider.dart';
 import '../../widgets/continue_learning_card.dart';
-import '../../widgets/stat_card.dart';
 import '../../widgets/track_selector_card.dart';
 import '../track/track_screen.dart';
 import '../study/study_screen.dart';
@@ -65,6 +62,8 @@ class _HomeView extends StatelessWidget {
                             builder: (_) => TrackScreen(
                               trackId: track.id,
                               trackName: track.name,
+                              image: track.image,
+                              color: track.color,
                             ),
                           ),
                         ),

@@ -7,9 +7,9 @@ import '../theme/app_colors.dart';
 /// are needed. Gently bobs up and down for a bit of life.
 class TrackHeroIllustration extends StatefulWidget {
   final Color color;
-  final IconData icon;
+  final String image;
 
-  const TrackHeroIllustration({super.key, required this.color, required this.icon});
+  const TrackHeroIllustration({super.key, required this.color, required this.image});
 
   @override
   State<TrackHeroIllustration> createState() => _TrackHeroIllustrationState();
@@ -36,40 +36,8 @@ class _TrackHeroIllustrationState extends State<TrackHeroIllustration>
         final dy = -6 * _controller.value;
         return Transform.translate(offset: Offset(0, dy), child: child);
       },
-      child: Container(
-        width: 92,
-        height: 92,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: LinearGradient(
-            colors: [widget.color.withOpacity(0.18), widget.color.withOpacity(0.06)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: Center(
-          child: Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: [widget.color, widget.color.withOpacity(0.75)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: widget.color.withOpacity(0.35),
-                  blurRadius: 20,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
-            child: Icon(widget.icon, color: Colors.white, size: 28),
-          ),
-        ),
-      ),
+
+        child: Image.asset(widget.image),
     );
   }
 }

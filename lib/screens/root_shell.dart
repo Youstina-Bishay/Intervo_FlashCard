@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intervo/screens/add_flashcard/add_flashcard_screen.dart';
 
 import '../theme/app_colors.dart';
 import 'home/home_screen.dart';
@@ -18,16 +19,14 @@ class _RootShellState extends State<RootShell> {
 
   final _tabs = const [
     HomeScreen(),
-    _PlaceholderTab(title: 'Study', icon: Icons.menu_book_rounded),
-    _PlaceholderTab(title: 'Progress', icon: Icons.bar_chart_rounded),
-    _PlaceholderTab(title: 'Profile', icon: Icons.person_rounded),
+    AddFlashcardScreen(initialTopicId: ""),
+    _PlaceholderTab(title: 'Add Card', icon: Icons.add),
+
   ];
 
   final _navItems = const [
     _NavItemData(icon: Icons.home_rounded, label: 'Home'),
-    _NavItemData(icon: Icons.menu_book_rounded, label: 'Study'),
-    _NavItemData(icon: Icons.bar_chart_rounded, label: 'Progress'),
-    _NavItemData(icon: Icons.person_rounded, label: 'Profile'),
+    _NavItemData(icon: Icons.add, label: 'Add Card'),
   ];
 
   @override
@@ -60,45 +59,47 @@ class _RootShellState extends State<RootShell> {
               final bool selected = i == _index;
               final item = _navItems[i];
 
-              return GestureDetector(
-                onTap: () => setState(() => _index = i),
-                behavior: HitTestBehavior.opaque,
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 17,
-                    vertical: 5,
-                  ),
-                  decoration: BoxDecoration(
-                    color: selected
-                        ? AppColors.primary.withOpacity(0.09)
-                        : Colors.transparent,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        item.icon,
-                        color: selected
-                            ? AppColors.primary
-                            : AppColors.textMuted,
-                        size: 24,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        item.label,
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: selected
-                              ? FontWeight.w600
-                              : FontWeight.w500,
+              return Expanded(
+                child: GestureDetector(
+                  onTap: () => setState(() => _index = i),
+                  behavior: HitTestBehavior.opaque,
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 17,
+                      vertical: 5,
+                    ),
+                    decoration: BoxDecoration(
+                      color: selected
+                          ? AppColors.primary.withOpacity(0.09)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          item.icon,
                           color: selected
                               ? AppColors.primary
                               : AppColors.textMuted,
+                          size: 24,
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 4),
+                        Text(
+                          item.label,
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: selected
+                                ? FontWeight.w600
+                                : FontWeight.w500,
+                            color: selected
+                                ? AppColors.primary
+                                : AppColors.textMuted,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
