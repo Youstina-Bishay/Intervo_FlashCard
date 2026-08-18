@@ -53,7 +53,7 @@ class TopicListItem extends StatelessWidget {
                           fontSize: 12, color: AppColors.textSecondary),
                     ),
                     const SizedBox(height: 8),
-                    ThinProgressBar(value: topic.progress, color: color),
+                    ThinProgressBar(value: 5, color: color),
                   ],
                 ),
               ),
@@ -61,7 +61,7 @@ class TopicListItem extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    '${topic.progressPercent}%',
+                    '500000%',
                     style: TextStyle(
                         fontWeight: FontWeight.w600, fontSize: 12, color: color),
                   ),

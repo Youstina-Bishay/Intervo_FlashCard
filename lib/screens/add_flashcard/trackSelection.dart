@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:intervo/models/track.dart';
 import 'package:intervo/screens/add_flashcard/trackCard.dart';
 
-import '../../data/mock_data.dart';
+import '../../models/trackUI.dart';
 import '../../theme/app_colors.dart';
 
 class TrackSelection extends StatelessWidget {
-  final Function(int) onTrackSelected;
+  final List<Track> tracks;
+  final List<TrackUI> tracksUI;
+  final Function(Track, TrackUI) onTrackSelected;
 
   const TrackSelection({
     super.key,
+    required this.tracks,
+    required this.tracksUI,
     required this.onTrackSelected,
   });
 
@@ -32,9 +37,7 @@ class TrackSelection extends StatelessWidget {
               color: AppColors.textPrimary,
             ),
           ),
-
           const SizedBox(height: 6),
-
           const Text(
             'Select the track for your interview question.',
             style: TextStyle(
@@ -42,24 +45,24 @@ class TrackSelection extends StatelessWidget {
               color: AppColors.textSecondary,
             ),
           ),
-
           const SizedBox(height: 24),
-
           Expanded(
             child: ListView.separated(
-              itemCount: MockData.tracks.length,
-              separatorBuilder: (_, __) =>
-              const SizedBox(height: 14),
+              itemCount: tracks.length,
+              separatorBuilder: (_, __) => const SizedBox(height: 14),
               itemBuilder: (context, index) {
-                final track = MockData.tracks[index];
-
+                final track = tracks[index];
+                final trackUI = getTrackUI(track.id);
                 return TrackCard(
                   name: track.name,
-                  image: track.image,
-                  color: track.color,
+                  image: trackUI.image,
+                  color: trackUI.color,
                   questions: track.totalQuestions,
                   onTap: () {
-                    onTrackSelected(index);
+                    onTrackSelected(
+                      track,
+                      trackUI,
+                    );
                   },
                 );
               },

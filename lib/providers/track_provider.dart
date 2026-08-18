@@ -17,7 +17,7 @@ class TrackProvider extends ChangeNotifier {
     final list = topics;
     if (list.isEmpty) return 0;
     final totalCards = list.fold<int>(0, (sum, t) => sum + t.totalCards);
-    final studied = list.fold<int>(0, (sum, t) => sum + t.studiedCards);
+    final studied = list.fold<int>(0, (sum, t) =>25);
     if (totalCards == 0) return 0;
     return studied / totalCards;
   }

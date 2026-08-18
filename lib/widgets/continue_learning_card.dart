@@ -60,7 +60,7 @@ class ContinueLearningCard extends StatelessWidget {
                         SizedBox(
                           width: 90,
                           child: LinearProgressIndicator(
-                            value: topic.progress,
+                            value: 5,
                             minHeight: 5,
                             borderRadius: BorderRadius.circular(4),
                             backgroundColor: color.withOpacity(0.15),
@@ -68,7 +68,7 @@ class ContinueLearningCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Text('${topic.studiedCards} / ${topic.totalCards} cards',
+                        Text('250 / ${topic.totalCards} cards',
                             style: const TextStyle(
                                 fontSize: 11, color: AppColors.textMuted)),
                       ],

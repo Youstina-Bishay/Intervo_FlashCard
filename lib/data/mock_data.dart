@@ -12,70 +12,65 @@ import '../theme/app_colors.dart';
 class MockData {
   MockData._();
 
-
   static final List<Track> tracks = [
     const Track(
       id: 'frontend',
       name: 'Frontend',
       description: 'Master the core concepts and be ready for any frontend interview.',
       totalQuestions: 320,
-      image: AppAssets.front,
-      color: AppColors.frontend
+
     ),
     const Track(
       id: 'backend',
       name: 'Backend',
       description: 'Master the core concepts and be ready for any backend interview.',
       totalQuestions: 410,
-        image: AppAssets.back,
-        color: AppColors.backend
+
     ),
     const Track(
       id: 'devops',
       name: 'DevOps',
       description: 'Master the tools and mindset to ship software faster and smarter.',
       totalQuestions: 140,
-        image: AppAssets.devops,
-        color: AppColors.devops    ),
+          ),
     const Track(
       id: 'Flutter',
       name: 'Flutter',
       description: 'Learn how to built mobile app .',
       totalQuestions: 140,
-        image: AppAssets.flutter,
-        color: AppColors.flutter
+
     ),
   ];
 
   static final List<Topic> topics = [
     // Backend
-    const Topic(id: 'rest_api', trackId: 'backend', name: 'REST API', iconKey: 'rest_api', totalCards: 30, studiedCards: 18),
-    const Topic(id: 'databases_sql', trackId: 'backend', name: 'Databases (SQL)', iconKey: 'sql', totalCards: 40, studiedCards: 18),
-    const Topic(id: 'system_design_topic', trackId: 'backend', name: 'System Design', iconKey: 'system_design', totalCards: 50, studiedCards: 10),
-    const Topic(id: 'authentication', trackId: 'backend', name: 'Authentication', iconKey: 'authentication', totalCards: 25, studiedCards: 0),
-    const Topic(id: 'docker_backend', trackId: 'backend', name: 'Docker', iconKey: 'docker', totalCards: 20, studiedCards: 0),
-    const Topic(id: 'linux_networking', trackId: 'backend', name: 'Linux & Networking', iconKey: 'linux', totalCards: 25, studiedCards: 0),
+    const Topic(id: 'rest_api', trackId: 'backend', name: 'REST API', iconKey: 'rest_api', totalCards: 30, ),
+    const Topic(id: 'databases_sql', trackId: 'backend', name: 'Databases (SQL)', iconKey: 'sql', totalCards: 40, ),
+    const Topic(id: 'system_design_topic', trackId: 'backend', name: 'System Design', iconKey: 'system_design', totalCards: 50, ),
+    const Topic(id: 'authentication', trackId: 'backend', name: 'Authentication', iconKey: 'authentication', totalCards: 25,),
+    const Topic(id: 'docker_backend', trackId: 'backend', name: 'Docker', iconKey: 'docker', totalCards: 20, ),
+    const Topic(id: 'linux_networking', trackId: 'backend', name: 'Linux & Networking', iconKey: 'linux', totalCards: 25,),
 
     // Database
-    const Topic(id: 'sql_basics', trackId: 'database', name: 'SQL Basics', iconKey: 'sql_basics', totalCards: 30, studiedCards: 18),
-    const Topic(id: 'normalization', trackId: 'database', name: 'Normalization', iconKey: 'normalization', totalCards: 25, studiedCards: 11),
-    const Topic(id: 'joins', trackId: 'database', name: 'Joins & Set Operations', iconKey: 'joins', totalCards: 35, studiedCards: 11),
-    const Topic(id: 'indexes', trackId: 'database', name: 'Indexes', iconKey: 'indexes', totalCards: 20, studiedCards: 4),
-    const Topic(id: 'transactions', trackId: 'database', name: 'Transactions', iconKey: 'transactions', totalCards: 25, studiedCards: 0),
+    const Topic(id: 'sql_basics', trackId: 'database', name: 'SQL Basics', iconKey: 'sql_basics', totalCards: 30, ),
+    const Topic(id: 'normalization', trackId: 'database', name: 'Normalization', iconKey: 'normalization', totalCards: 25, ),
+    const Topic(id: 'joins', trackId: 'database', name: 'Joins & Set Operations', iconKey: 'joins', totalCards: 35, ),
+    const Topic(id: 'indexes', trackId: 'database', name: 'Indexes', iconKey: 'indexes', totalCards: 20, ),
+    const Topic(id: 'transactions', trackId: 'database', name: 'Transactions', iconKey: 'transactions', totalCards: 25, ),
 
     // DevOps
-    const Topic(id: 'git_github', trackId: 'devops', name: 'Git & GitHub', iconKey: 'git', totalCards: 30, studiedCards: 18),
-    const Topic(id: 'ci_cd', trackId: 'devops', name: 'CI / CD', iconKey: 'ci_cd', totalCards: 30, studiedCards: 15),
-    const Topic(id: 'docker_devops', trackId: 'devops', name: 'Docker', iconKey: 'docker', totalCards: 25, studiedCards: 10),
-    const Topic(id: 'kubernetes', trackId: 'devops', name: 'Kubernetes', iconKey: 'kubernetes', totalCards: 30, studiedCards: 6),
-    const Topic(id: 'iac', trackId: 'devops', name: 'Infrastructure as Code', iconKey: 'iac', totalCards: 25, studiedCards: 0),
+    const Topic(id: 'git_github', trackId: 'devops', name: 'Git & GitHub', iconKey: 'git', totalCards: 30, ),
+    const Topic(id: 'ci_cd', trackId: 'devops', name: 'CI / CD', iconKey: 'ci_cd', totalCards: 30, ),
+    const Topic(id: 'docker_devops', trackId: 'devops', name: 'Docker', iconKey: 'docker', totalCards: 25, ),
+    const Topic(id: 'kubernetes', trackId: 'devops', name: 'Kubernetes', iconKey: 'kubernetes', totalCards: 30, ),
+    const Topic(id: 'iac', trackId: 'devops', name: 'Infrastructure as Code', iconKey: 'iac', totalCards: 25, ),
 
     // System Design
-    const Topic(id: 'sd_basics', trackId: 'system_design', name: 'Basics', iconKey: 'basics', totalCards: 35, studiedCards: 21),
-    const Topic(id: 'scalability', trackId: 'system_design', name: 'Scalability', iconKey: 'scalability', totalCards: 30, studiedCards: 15),
-    const Topic(id: 'load_balancing', trackId: 'system_design', name: 'Load Balancing', iconKey: 'load_balancing', totalCards: 20, studiedCards: 8),
-    const Topic(id: 'caching', trackId: 'system_design', name: 'Caching', iconKey: 'caching', totalCards: 25, studiedCards: 5),
-    const Topic(id: 'databases_in_depth', trackId: 'system_design', name: 'Databases in Depth', iconKey: 'databases_in_depth', totalCards: 30, studiedCards: 0),
+    const Topic(id: 'sd_basics', trackId: 'system_design', name: 'Basics', iconKey: 'basics', totalCards: 35, ),
+    const Topic(id: 'scalability', trackId: 'system_design', name: 'Scalability', iconKey: 'scalability', totalCards: 30,),
+    const Topic(id: 'load_balancing', trackId: 'system_design', name: 'Load Balancing', iconKey: 'load_balancing', totalCards: 20, ),
+    const Topic(id: 'caching', trackId: 'system_design', name: 'Caching', iconKey: 'caching', totalCards: 25, ),
+    const Topic(id: 'databases_in_depth', trackId: 'system_design', name: 'Databases in Depth', iconKey: 'databases_in_depth', totalCards: 30, ),
   ];
 
   /// The topic shown on Home under "Continue Learning".

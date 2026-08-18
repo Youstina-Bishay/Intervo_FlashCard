@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intervo/core/constants/screenSize.dart';
+import 'package:intervo/models/trackUI.dart';
 import '../theme/app_colors.dart';
 import '../models/track.dart';
 
 class TrackSelectorCard extends StatelessWidget {
   final Track track;
   final VoidCallback onTap;
-
+final TrackUI trackUI;
   const TrackSelectorCard({
     super.key,
     required this.track,
+    required this.trackUI,
     required this.onTap,
   });
 
@@ -56,7 +58,7 @@ class TrackSelectorCard extends StatelessWidget {
               Expanded(
                 child: Center(
                   child: Image.asset(
-                    track.image,
+                    trackUI.image,
                     width: ScreenSize.width(context) * .35,
                     fit: BoxFit.contain,
                   ),
@@ -84,7 +86,7 @@ class TrackSelectorCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      '${track.totalQuestions}+ Questions',
+                      '25+ Questions',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(

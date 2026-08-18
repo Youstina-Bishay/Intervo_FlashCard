@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intervo/models/track.dart';
 import 'package:intervo/screens/add_flashcard/trackSelection.dart';
+
+import '../../models/trackUI.dart';
 import '../../theme/app_colors.dart';
 import 'addQuestionForm.dart';
 
@@ -13,33 +16,31 @@ class AddFlashcardScreen extends StatefulWidget {
 class _AddFlashcardScreenState extends State<AddFlashcardScreen> {
   bool showForm = false;
 
-  int selectedTrackIndex = 0;
+  Track? selectedTrack;
+  TrackUI? selectedTrackUI;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: false,
-
         leading: showForm
             ? IconButton(
-          onPressed: () {
-            setState(() {
-              showForm = false;
-            });
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            size: 20,
-            color: AppColors.textPrimary,
-          ),
-        )
+                onPressed: () {
+                  setState(() {
+                    showForm = false;
+                  });
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  size: 20,
+                  color: AppColors.textPrimary,
+                ),
+              )
             : null,
-
         title: Text(
           showForm ? 'Add Interview Question' : 'Choose Your Track',
           style: const TextStyle(
@@ -61,22 +62,23 @@ class _AddFlashcardScreenState extends State<AddFlashcardScreen> {
         },
         child: showForm
             ? AddQuestionForm(
-          key: const ValueKey('form'),
-          trackIndex: selectedTrackIndex,
-        )
+                key: const ValueKey('form'),
+                track: selectedTrack!,
+                trackUI: selectedTrackUI!,
+              )
             : TrackSelection(
-          key: const ValueKey('tracks'),
-          onTrackSelected: (index) {
-            setState(() {
-              selectedTrackIndex = index;
-              showForm = true;
-            });
-          },
-        ),
+                key: const ValueKey('tracks'),
+                onTrackSelected: (track, trackUI) {
+                  setState(() {
+                    selectedTrack = track;
+                    selectedTrackUI = trackUI;
+                    showForm = true;
+                  });
+                },
+                tracks: [],
+                tracksUI: [],
+              ),
       ),
     );
   }
 }
-
-
-

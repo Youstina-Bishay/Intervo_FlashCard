@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:intervo/models/track.dart';
 import 'package:intervo/screens/add_flashcard/sectionLabel.dart';
 
 import '../../core/widgets/gradient_button.dart';
-import '../../data/mock_data.dart';
+import '../../models/trackUI.dart';
 import '../../theme/app_colors.dart';
 import 'inputCard.dart';
 
 class AddQuestionForm extends StatefulWidget {
-  final int trackIndex;
+  final Track track;
+  final TrackUI trackUI;
 
   const AddQuestionForm({
     super.key,
-    required this.trackIndex,
+    required this.track,
+    required this.trackUI,
   });
 
   @override
-  State<AddQuestionForm> createState() =>
-      _AddQuestionFormState();
+  State<AddQuestionForm> createState() => _AddQuestionFormState();
 }
 
 class _AddQuestionFormState extends State<AddQuestionForm> {
   final questionController = TextEditingController();
   final answerController = TextEditingController();
+
+  String selectedTopic = 'General';
 
   @override
   void dispose() {
@@ -32,7 +36,8 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
 
   @override
   Widget build(BuildContext context) {
-    final track = MockData.tracks[widget.trackIndex];
+    final track = widget.track;
+    final trackUI = widget.trackUI;
 
     return ListView(
       padding: const EdgeInsets.fromLTRB(
@@ -42,13 +47,11 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
         32,
       ),
       children: [
-
         Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: track.color.withOpacity(.10),
-
+            color: trackUI.color.withOpacity(.10),
           ),
           child: Row(
             children: [
@@ -61,7 +64,7 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
                   borderRadius: BorderRadius.circular(13),
                 ),
                 child: Image.asset(
-                  track.image,
+                  trackUI.image,
                   fit: BoxFit.contain,
                 ),
               ),
@@ -70,8 +73,7 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
 
               Expanded(
                 child: Column(
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
                       'Adding to',
@@ -127,7 +129,6 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
           ),
         ),
 
-
         const SizedBox(height: 28),
         const SectionLabel(
           icon: Icons.category_outlined,
@@ -136,9 +137,20 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
 
         const SizedBox(height: 9),
 
-        topicDropDownButton(),
+        TopicDropDownButton(
+          value: selectedTopic,
+          onChanged: (value) {
+            if (value == null) return;
+
+            setState(() {
+              selectedTopic = value;
+            });
+          },
+        ),
 
         const SizedBox(height: 24),
+
+
         const SectionLabel(
           icon: Icons.help_outline_rounded,
           title: 'Interview question',
@@ -148,8 +160,7 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
 
         InputCard(
           child: Column(
-            crossAxisAlignment:
-            CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -164,50 +175,41 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
                   maxLines: 5,
                   maxLength: 300,
                   onChanged: (_) => setState(() {}),
-
                   style: const TextStyle(
                     fontSize: 14,
                     height: 1.5,
                     fontWeight: FontWeight.w500,
                     color: AppColors.textPrimary,
                   ),
-
                   decoration: InputDecoration(
                     hintText:
                     'e.g. What is the difference between '
                         'let, const and var in JavaScript?',
-
                     hintStyle: const TextStyle(
                       fontSize: 13,
                       height: 1.5,
                       color: AppColors.textMuted,
                     ),
-
                     filled: true,
                     fillColor: AppColors.background,
-
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
                       borderSide: BorderSide.none,
                     ),
-
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: AppColors.cardBorder,
                       ),
                     ),
-
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
                       borderSide: BorderSide(
-                        color: AppColors.primary.withOpacity(.55),
+                        color: AppColors.primary,
                         width: 1.3,
                       ),
                     ),
-
                     counterText: '',
-
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 14,
                       vertical: 14,
@@ -215,6 +217,7 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 10),
 
               Row(
@@ -251,6 +254,7 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
         ),
 
         const SizedBox(height: 24),
+
         const SectionLabel(
           icon: Icons.check_circle_outline_rounded,
           title: 'Answer',
@@ -260,8 +264,7 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
 
         InputCard(
           child: Column(
-            crossAxisAlignment:
-            CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -272,54 +275,45 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
                   ),
                 ),
                 child: TextField(
-                  controller: questionController,
+                  controller: answerController,
                   maxLines: 5,
-                  maxLength: 300,
+                  maxLength: 1000,
                   onChanged: (_) => setState(() {}),
-
                   style: const TextStyle(
                     fontSize: 14,
                     height: 1.5,
                     fontWeight: FontWeight.w500,
                     color: AppColors.textPrimary,
                   ),
-
                   decoration: InputDecoration(
                     hintText:
                     'Write a clear explanation that helps '
                         'the reader understand the answer...',
-
                     hintStyle: const TextStyle(
                       fontSize: 13,
                       height: 1.5,
                       color: AppColors.textMuted,
                     ),
-
                     filled: true,
                     fillColor: AppColors.background,
-
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
                       borderSide: BorderSide.none,
                     ),
-
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: AppColors.cardBorder,
                       ),
                     ),
-
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
                       borderSide: BorderSide(
-                        color: AppColors.primary.withOpacity(.55),
+                        color: AppColors.primary,
                         width: 1.3,
                       ),
                     ),
-
                     counterText: '',
-
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 14,
                       vertical: 14,
@@ -327,6 +321,7 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 10),
 
               Row(
@@ -363,7 +358,6 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
         ),
 
         const SizedBox(height: 28),
-
         GradientButton(
           label: 'Publish Question',
           icon: Icons.arrow_upward_rounded,
@@ -386,9 +380,14 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
   }
 }
 
-class topicDropDownButton extends StatelessWidget {
-  const topicDropDownButton({
+class TopicDropDownButton extends StatelessWidget {
+  final String value;
+  final ValueChanged<String?> onChanged;
+
+  const TopicDropDownButton({
     super.key,
+    required this.value,
+    required this.onChanged,
   });
 
   @override
@@ -407,7 +406,7 @@ class topicDropDownButton extends StatelessWidget {
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          value: 'General',
+          value: value,
           isExpanded: true,
           icon: const Icon(
             Icons.keyboard_arrow_down_rounded,
@@ -432,7 +431,7 @@ class topicDropDownButton extends StatelessWidget {
               child: Text('Advanced'),
             ),
           ],
-          onChanged: (_) {},
+          onChanged: onChanged,
         ),
       ),
     );
