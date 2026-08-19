@@ -4,19 +4,19 @@ import '../../core/constants/appAssets.dart';
 import '../../theme/app_colors.dart';
 
 class CardFace extends StatelessWidget {
+  final String trackId;
   final String text;
   final bool isAnswer;
   final bool isBookmarked;
-  final IconData topicIcon;
   final Color accentColor;
   final VoidCallback onBookmarkTap;
 
   const CardFace({
     super.key,
     required this.text,
+    required this.trackId,
     required this.isAnswer,
     required this.isBookmarked,
-    required this.topicIcon,
     required this.accentColor,
     required this.onBookmarkTap,
   });
@@ -30,7 +30,7 @@ class CardFace extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Image.asset(
-              AppAssets.dev_q,
+              AppAssets.getQuestionImage(trackId),
               fit: BoxFit.cover,
             ),
           ),

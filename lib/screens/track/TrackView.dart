@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../models/track.dart';
 import '../../presentation/cubit/trackCubit.dart';
 import '../../presentation/cubit/trackState.dart';
 import '../../theme/app_colors.dart';
@@ -93,6 +94,7 @@ class TrackView extends StatelessWidget {
                       return TabBarView(
                         children: [
                           _TopicsTab(
+                            track: trackId,
                             color: color,
                             topics: state.topics ?? [],
                           ),
@@ -115,9 +117,11 @@ class TrackView extends StatelessWidget {
 class _TopicsTab extends StatelessWidget {
   final List topics;
 final Color color ;
+final String track ;
   const _TopicsTab({
     required this.topics,
     required this.color,
+    required this.track,
   });
 
   @override
@@ -155,6 +159,7 @@ final Color color ;
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (_) => StudyScreen(
+                    trackId :track,
                     topicId: topic.name,
                     topicName: topic.name,
                   ),

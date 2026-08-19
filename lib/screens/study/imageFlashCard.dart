@@ -3,22 +3,22 @@ import 'package:flutter/material.dart';
 import 'cardFace.dart';
 
 class ImageFlashcard extends StatelessWidget {
+  final String trackId;
   final String question;
   final String answer;
   final bool showAnswer;
   final bool isBookmarked;
-  final IconData topicIcon;
   final Color accentColor;
   final VoidCallback onTap;
   final VoidCallback onBookmarkTap;
 
   const ImageFlashcard({
     super.key,
+    required this.trackId,
     required this.question,
     required this.answer,
     required this.showAnswer,
     required this.isBookmarked,
-    required this.topicIcon,
     required this.accentColor,
     required this.onTap,
     required this.onBookmarkTap,
@@ -64,11 +64,11 @@ class ImageFlashcard extends StatelessWidget {
           );
         },
         child: CardFace(
+          trackId : trackId,
           key: ValueKey(showAnswer),
           text: showAnswer ? answer : question,
           isAnswer: showAnswer,
           isBookmarked: isBookmarked,
-          topicIcon: topicIcon,
           accentColor: accentColor,
           onBookmarkTap: onBookmarkTap,
         ),

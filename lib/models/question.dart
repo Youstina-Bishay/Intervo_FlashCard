@@ -9,15 +9,15 @@ class Question {
 
   factory Question.fromMap(Map<String, dynamic> map) {
     return Question(
-      question: map['question'] ?? '',
-      answer: map['answer'] ?? '',
+      question: map['Q'] ?? '',
+      answer: map['A'] ?? '',
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'question': question,
-      'answer': answer,
+      'Q': question,
+      'A': answer,
     };
   }
 }

@@ -1,4 +1,5 @@
 import 'package:intervo/data/datasources/home_remote_data_source.dart';
+import 'package:intervo/models/question.dart';
 import 'package:intervo/models/topic.dart';
 import 'package:intervo/models/track.dart';
 
@@ -17,6 +18,12 @@ HomeRepoImpl({required this.dataSource});
   Future<List<Topic>> getAllTopics(String track)async {
   final topics = await dataSource.getAllTopics(track);
   return topics;
+  }
+
+  @override
+  Future<List<Question>> getQuestions(String trackId, String topicName)async {
+   final questions = await dataSource.getQuestions(trackId, topicName);
+   return questions;
   }
 
 }

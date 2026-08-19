@@ -8,4 +8,18 @@ class AppAssets{
   static const String flutter_q="assets/images/flutter_q.png";
   static const String devops="assets/images/devops.png";
   static const String dev_q="assets/images/dev_q.png";
+
+
+
+  static String getQuestionImage(String name){
+    if(name=="Flutter"){
+      return flutter_q;
+    }else if(name=="backend"){
+      return back_q;
+    }else if(name=="frontend"){
+      return front_q;
+    }else {
+      return dev_q;
+    }
+  }
 }
