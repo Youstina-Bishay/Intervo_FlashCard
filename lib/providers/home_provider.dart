@@ -9,5 +9,4 @@ import '../models/user_stats.dart';
 /// no async loading, since this is a UI-only build.
 class HomeProvider extends ChangeNotifier {
   List<Track> get tracks => MockData.tracks;
-  Topic get continueLearningTopic => MockData.continueLearningTopic;
 }

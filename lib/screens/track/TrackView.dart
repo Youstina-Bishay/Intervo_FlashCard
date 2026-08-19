@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../presentation/cubit/trackCubit.dart';
+import '../../presentation/cubit/trackState.dart';
 import '../../theme/app_colors.dart';
 import '../../widgets/topic_list_item.dart';
 import '../study/study_screen.dart';
@@ -30,7 +33,6 @@ class TrackView extends StatelessWidget {
             children: [
               HeroSection(color: color, trackName: trackName, image: image),
               const SizedBox(height: 16),
-
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
@@ -45,29 +47,22 @@ class TrackView extends StatelessWidget {
                   child: TabBar(
                     labelColor: Colors.white,
                     unselectedLabelColor: AppColors.textSecondary,
-
                     labelStyle: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
-
                     unselectedLabelStyle: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
-
                     indicator: BoxDecoration(
                       color: color,
-                      border: BoxBorder.all(color: Colors.black26,width: 2),
+                      border: BoxBorder.all(color: Colors.black26, width: 2),
                       borderRadius: BorderRadius.circular(22),
                     ),
-
                     indicatorSize: TabBarIndicatorSize.tab,
                     dividerColor: Colors.transparent,
-
-                    overlayColor:
-                    WidgetStateProperty.all(Colors.transparent),
-
+                    overlayColor: WidgetStateProperty.all(Colors.transparent),
                     tabs: const [
                       Tab(
                         text: 'Topics',
@@ -76,15 +71,37 @@ class TrackView extends StatelessWidget {
                   ),
                 ),
               ),
-
               const SizedBox(height: 12),
               Expanded(
-                child: TabBarView(
-                  children: [
-                    _TopicsTab(
-                      tracks: [],
-                    ),
-                  ],
+                child: BlocBuilder<TrackCubit, TrackState>(
+                  builder: (context, state) {
+                    if (state.status == TrackStatus.loading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    if (state.status == TrackStatus.error) {
+                      return Center(
+                        child: Text(
+                          state.errorMessage ?? 'Something went wrong',
+                        ),
+                      );
+                    }
+
+                    if (state.status == TrackStatus.success) {
+                      return TabBarView(
+                        children: [
+                          _TopicsTab(
+                            color: color,
+                            topics: state.topics ?? [],
+                          ),
+                        ],
+                      );
+                    }
+
+                    return const SizedBox();
+                  },
                 ),
               ),
             ],
@@ -94,16 +111,18 @@ class TrackView extends StatelessWidget {
     );
   }
 }
-class _TopicsTab extends StatelessWidget {
-  final List tracks;
 
+class _TopicsTab extends StatelessWidget {
+  final List topics;
+final Color color ;
   const _TopicsTab({
-    required this.tracks,
+    required this.topics,
+    required this.color,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (tracks.isEmpty) {
+    if (topics.isEmpty) {
       return const Center(
         child: Text(
           'No topics yet.',
@@ -121,21 +140,22 @@ class _TopicsTab extends StatelessWidget {
         20,
         20,
       ),
-      itemCount: tracks.length,
+      itemCount: topics.length,
       itemBuilder: (context, index) {
-        final topic = tracks[index];
+        final topic = topics[index];
 
         return Padding(
           padding: const EdgeInsets.only(
             bottom: 10,
           ),
           child: TopicListItem(
+            color: color,
             topic: topic,
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (_) => StudyScreen(
-                    topicId: topic.id,
+                    topicId: topic.name,
                     topicName: topic.name,
                   ),
                 ),
@@ -147,4 +167,3 @@ class _TopicsTab extends StatelessWidget {
     );
   }
 }
-

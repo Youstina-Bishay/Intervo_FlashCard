@@ -13,7 +13,6 @@ class AddFlashcardProvider extends ChangeNotifier {
 
   final String initialTrackId;
   late String selectedTrackId = initialTrackId;
-  late Topic? selectedTopic = _topicsForTrack(initialTrackId).firstOrNull;
 
   final questionController = TextEditingController();
   final answerController = TextEditingController();
@@ -23,43 +22,27 @@ class AddFlashcardProvider extends ChangeNotifier {
     answerController.addListener(notifyListeners);
   }
 
-  List<Topic> get topicsForSelectedTrack => _topicsForTrack(selectedTrackId);
 
-  List<Topic> _topicsForTrack(String trackId) =>
-      MockData.topics.where((t) => t.trackId == trackId).toList();
 
   String get initialTrackName =>
       MockData.tracks.firstWhere((t) => t.id == initialTrackId).name;
 
   void selectTrack(String trackId) {
     selectedTrackId = trackId;
-    selectedTopic = _topicsForTrack(trackId).firstOrNull;
     notifyListeners();
   }
 
   void selectTopic(Topic topic) {
-    selectedTopic = topic;
     notifyListeners();
   }
 
   bool get canSave =>
-      selectedTopic != null &&
       questionController.text.trim().isNotEmpty &&
       answerController.text.trim().isNotEmpty;
 
   /// Returns the id of the topic the card was saved under, or null if the
   /// form wasn't valid.
-  String? save() {
-    if (!canSave) return null;
-    final topicId = selectedTopic!.id;
-    MockData.flashcards.add(Flashcard(
-      id: 'card_${DateTime.now().microsecondsSinceEpoch}',
-      topicId: topicId,
-      question: questionController.text.trim(),
-      answer: answerController.text.trim(),
-    ));
-    return topicId;
-  }
+
 
   @override
   void dispose() {

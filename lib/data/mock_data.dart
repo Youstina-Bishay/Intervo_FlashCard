@@ -44,38 +44,98 @@ class MockData {
 
   static final List<Topic> topics = [
     // Backend
-    const Topic(id: 'rest_api', trackId: 'backend', name: 'REST API', iconKey: 'rest_api', totalCards: 30, ),
-    const Topic(id: 'databases_sql', trackId: 'backend', name: 'Databases (SQL)', iconKey: 'sql', totalCards: 40, ),
-    const Topic(id: 'system_design_topic', trackId: 'backend', name: 'System Design', iconKey: 'system_design', totalCards: 50, ),
-    const Topic(id: 'authentication', trackId: 'backend', name: 'Authentication', iconKey: 'authentication', totalCards: 25,),
-    const Topic(id: 'docker_backend', trackId: 'backend', name: 'Docker', iconKey: 'docker', totalCards: 20, ),
-    const Topic(id: 'linux_networking', trackId: 'backend', name: 'Linux & Networking', iconKey: 'linux', totalCards: 25,),
+    Topic(
+      name: 'REST API',
+      questions: [],
+    ),
+    Topic(
+      name: 'Databases (SQL)',
+      questions: [],
+    ),
+    Topic(
+      name: 'System Design',
+      questions: [],
+    ),
+    Topic(
+      name: 'Authentication',
+      questions: [],
+    ),
+    Topic(
+      name: 'Docker',
+      questions: [],
+    ),
+    Topic(
+      name: 'Linux & Networking',
+      questions: [],
+    ),
 
     // Database
-    const Topic(id: 'sql_basics', trackId: 'database', name: 'SQL Basics', iconKey: 'sql_basics', totalCards: 30, ),
-    const Topic(id: 'normalization', trackId: 'database', name: 'Normalization', iconKey: 'normalization', totalCards: 25, ),
-    const Topic(id: 'joins', trackId: 'database', name: 'Joins & Set Operations', iconKey: 'joins', totalCards: 35, ),
-    const Topic(id: 'indexes', trackId: 'database', name: 'Indexes', iconKey: 'indexes', totalCards: 20, ),
-    const Topic(id: 'transactions', trackId: 'database', name: 'Transactions', iconKey: 'transactions', totalCards: 25, ),
+    Topic(
+      name: 'SQL Basics',
+      questions: [],
+    ),
+    Topic(
+      name: 'Normalization',
+      questions: [],
+    ),
+    Topic(
+      name: 'Joins & Set Operations',
+      questions: [],
+    ),
+    Topic(
+      name: 'Indexes',
+      questions: [],
+    ),
+    Topic(
+      name: 'Transactions',
+      questions: [],
+    ),
 
     // DevOps
-    const Topic(id: 'git_github', trackId: 'devops', name: 'Git & GitHub', iconKey: 'git', totalCards: 30, ),
-    const Topic(id: 'ci_cd', trackId: 'devops', name: 'CI / CD', iconKey: 'ci_cd', totalCards: 30, ),
-    const Topic(id: 'docker_devops', trackId: 'devops', name: 'Docker', iconKey: 'docker', totalCards: 25, ),
-    const Topic(id: 'kubernetes', trackId: 'devops', name: 'Kubernetes', iconKey: 'kubernetes', totalCards: 30, ),
-    const Topic(id: 'iac', trackId: 'devops', name: 'Infrastructure as Code', iconKey: 'iac', totalCards: 25, ),
+    Topic(
+      name: 'Git & GitHub',
+      questions: [],
+    ),
+    Topic(
+      name: 'CI / CD',
+      questions: [],
+    ),
+    Topic(
+      name: 'Docker',
+      questions: [],
+    ),
+    Topic(
+      name: 'Kubernetes',
+      questions: [],
+    ),
+    Topic(
+      name: 'Infrastructure as Code',
+      questions: [],
+    ),
 
     // System Design
-    const Topic(id: 'sd_basics', trackId: 'system_design', name: 'Basics', iconKey: 'basics', totalCards: 35, ),
-    const Topic(id: 'scalability', trackId: 'system_design', name: 'Scalability', iconKey: 'scalability', totalCards: 30,),
-    const Topic(id: 'load_balancing', trackId: 'system_design', name: 'Load Balancing', iconKey: 'load_balancing', totalCards: 20, ),
-    const Topic(id: 'caching', trackId: 'system_design', name: 'Caching', iconKey: 'caching', totalCards: 25, ),
-    const Topic(id: 'databases_in_depth', trackId: 'system_design', name: 'Databases in Depth', iconKey: 'databases_in_depth', totalCards: 30, ),
+    Topic(
+      name: 'Basics',
+      questions: [],
+    ),
+    Topic(
+      name: 'Scalability',
+      questions: [],
+    ),
+    Topic(
+      name: 'Load Balancing',
+      questions: [],
+    ),
+    Topic(
+      name: 'Caching',
+      questions: [],
+    ),
+    Topic(
+      name: 'Databases in Depth',
+      questions: [],
+    ),
   ];
-
   /// The topic shown on Home under "Continue Learning".
-  static Topic get continueLearningTopic =>
-      topics.firstWhere((t) => t.id == 'rest_api');
 
   static final List<Flashcard> flashcards = [
     const Flashcard(

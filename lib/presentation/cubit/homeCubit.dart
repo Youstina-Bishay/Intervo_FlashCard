@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intervo/domain/home_repository.dart';
+import 'package:intervo/domain/repositories/home_repository.dart';
 import 'package:intervo/presentation/cubit/HomeState.dart';
 
 class HomeCubit extends Cubit<HomeState> {

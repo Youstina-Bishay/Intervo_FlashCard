@@ -1,25 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intervo/data/datasources/home_remote_data_source.dart';
+import 'package:intervo/core/di/injection.dart';
 import 'package:intervo/data/datasources/home_remote_data_source_impl.dart';
 import 'package:intervo/data/repositories/home_repository_impl.dart';
 import 'package:intervo/presentation/cubit/homeCubit.dart';
-import 'package:provider/provider.dart';
-
 import 'package:intervo/core/constants/screenSize.dart';
-import 'package:intervo/screens/home/statsRow.dart';
-import 'package:intervo/providers/home_provider.dart';
-import 'package:intervo/widgets/continue_learning_card.dart';
 import 'package:intervo/widgets/track_selector_card.dart';
-
 import '../../models/trackUI.dart';
 import '../../presentation/cubit/HomeState.dart';
 import '../track/track_screen.dart';
-import '../study/study_screen.dart';
-
 import '../../theme/app_colors.dart';
-
 import 'PracticeBanner.dart';
 import 'header.dart';
 
@@ -28,15 +19,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final firestore = FirebaseFirestore.instance;
-
-    final homeRemoteDataSource = HomeRemoteDataSourceImpl(
-      firestore: firestore,
-    );
-    final repo = HomeRepoImpl(
-      dataSource: homeRemoteDataSource,
-    );
-
+ final repo= createHomeRepo();
     return BlocProvider(
       // .. Cascade notation
       create: (_) => HomeCubit(repo: repo)..getAllTracks(),

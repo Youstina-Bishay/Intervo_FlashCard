@@ -19,7 +19,7 @@ class ContinueLearningCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = AppColors.trackColor(topic.iconKey);
+    final color = AppColors.trackColor(topic.name);
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -40,7 +40,7 @@ class ContinueLearningCard extends StatelessWidget {
                   color: color.withOpacity(0.12),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(iconForKey(topic.iconKey), color: color),
+                child: Icon(Icons.access_alarm, color: color),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -68,7 +68,7 @@ class ContinueLearningCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Text('250 / ${topic.totalCards} cards',
+                        Text('250 /  cards',
                             style: const TextStyle(
                                 fontSize: 11, color: AppColors.textMuted)),
                       ],

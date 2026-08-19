@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../core/constants/icon_map.dart';
 import '../theme/app_colors.dart';
 import '../core/widgets/progress_bar.dart';
 import '../models/topic.dart';
@@ -7,12 +6,12 @@ import '../models/topic.dart';
 class TopicListItem extends StatelessWidget {
   final Topic topic;
   final VoidCallback onTap;
+  final Color color ;
 
-  const TopicListItem({super.key, required this.topic, required this.onTap});
+  const TopicListItem({super.key, required this.topic, required this.onTap,required this.color});
 
   @override
   Widget build(BuildContext context) {
-    final color = AppColors.trackColor(topic.iconKey);
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -24,7 +23,7 @@ class TopicListItem extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: AppColors.cardBorder),
+            border: Border.all(color: color),
           ),
           child: Row(
             children: [
@@ -34,7 +33,7 @@ class TopicListItem extends StatelessWidget {
                   color: color.withOpacity(0.12),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(iconForKey(topic.iconKey), color: color),
+                child: Icon(Icons.add, color: color),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -48,7 +47,7 @@ class TopicListItem extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      '${topic.totalCards} cards',
+                      '  nummmmmmmmm cards',
                       style: const TextStyle(
                           fontSize: 12, color: AppColors.textSecondary),
                     ),
