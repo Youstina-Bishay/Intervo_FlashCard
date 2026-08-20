@@ -23,8 +23,34 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }catch(e){
       emit(state.copyWith(status: Status.error,
-      errorMsg: e.toString()
+          errorMessage: e.toString()
       ));
+    }
+  }
+
+  Future<void> getAllTopics(String trackId) async {
+    emit(
+      state.copyWith(
+        status: Status.loading,
+      ),
+    );
+
+    try {
+      final topics = await repo.getAllTopics(trackId);
+
+      emit(
+        state.copyWith(
+          status: Status.success,
+          topics: topics,
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: Status.error,
+          errorMessage: e.toString(),
+        ),
+      );
     }
   }
 }

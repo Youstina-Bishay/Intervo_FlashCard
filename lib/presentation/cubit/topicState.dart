@@ -1,5 +1,6 @@
 
-import 'package:intervo/models/question.dart';
+import '../../domain/models/question.dart';
+
 enum TopicStatus {
   initial,
   loading,

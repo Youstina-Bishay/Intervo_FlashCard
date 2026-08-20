@@ -1,5 +1,6 @@
 
-import '../../models/topic.dart';
+import '../../domain/models/topic.dart';
+
 enum TrackStatus {
   initial,
   loading,

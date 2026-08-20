@@ -1,26 +1,39 @@
-import 'package:intervo/models/track.dart';
+import '../../domain/models/topic.dart';
+import '../../domain/models/track.dart';
 
-enum Status {initial , loading , success , error}
+enum Status {
+  initial,
+  loading,
+  success,
+  error,
+}
 
-class HomeState{
+class HomeState {
   final Status status;
-  final List<Track>? tracks ;
-  final String? errorMsg ;
+  final List<Track> tracks;
+  final List<Topic> topics;
+  final String? errorMessage;
 
   const HomeState({
-    this.status=Status.initial ,
-    this.tracks,
-    this.errorMsg
-});
+    this.status = Status.initial,
+    this.tracks = const [],
+    this.topics = const [],
+    this.errorMessage,
+  });
+
   HomeState copyWith({
     Status? status,
     List<Track>? tracks,
-    String? errorMsg,
+    List<Topic>? topics,
+    String? errorMessage,
   }) {
     return HomeState(
       status: status ?? this.status,
       tracks: tracks ?? this.tracks,
-      errorMsg: errorMsg ?? this.errorMsg,
+      topics: topics ?? this.topics,
+      errorMessage: errorMessage,
     );
   }
+
+
 }
